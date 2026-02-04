@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="head">
+      <h1>Event Flow Playground</h1>
+      <p>Demonstating Capturing, Bubbling and Propogation Control</p>
+    </div>
+    <div class="container">
+      <div class="box11">
+        <b>Grandparent</b>
+        <div class="box12">
+          <b>Parent</b>
+          <button class="btn">Click Me</button>
+        </div>
+      </div>
+      <div class="eventlog">
+        <h1>Event Log</h1>
+        <div class="eventlog-container">
+          <div class="event-item">Grandparent - Capturing</div>
+          <div class="event-item">Parent - Capturing</div>
+          <div class="event-item">Parent - Bubbling</div>
+          <div class="event-item">Grandparent - Bubbling</div>
+          <div class="event-item">Parent - Capturing</div>
+          <div class="event-item">Parent - Capturing</div>
+          <div class="event-item">Parent → Bubbling</div>
+          <div class="event-item">Parent → Bubbling</div>
+        </div>
+        <div class="event-note">
+          Capturing → Target → Bubbling<br />stopPropagation would prevent<br />event
+          from reaching sibling handlers
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
