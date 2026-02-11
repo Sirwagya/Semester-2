@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <title>Ball Game</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        text-align: left;
+      }
+      .gamearea {
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
+        position: relative;
+      }
+      .score {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .ball {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        cursor: pointer;
+      }
+      .ball:hover {
+        background-color: rgb(128, 0, 0);
+        transition: background-color 0.3s ease;
+        transform: scale(1.2);
+        transition: transform 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      function Ball(props) {
+        return React.createElement("div", {
+          className: "ball",
+          onClick: props.onClick,
+          style: {
+            top: props.y + "px",
+            left: props.x + "px",
+          },
+        });
+      }
+
+      function Score(props) {
+        return React.createElement(
+          "div",
+          { className: "score" },
+          "Score: ",
+          React.createElement("span", null, props.value),
+        );
+      }
+
+      function Game() {
+        let scoreState = React.useState(0);
+        console.log(scoreState);
+        let score = scoreState[0];
+        let setScore = scoreState[1];
+
+        let positionState = React.useState({ x: 225, y: 225 });
+        console.log(positionState);
+        let position = positionState[0];
+        let setPosition = positionState[1];
+
+        function handleClick() {
+          setScore(score + 1);
+
+          let randomX = Math.floor(Math.random() * 450);
+          let randomY = Math.floor(Math.random() * 450);
+          setPosition({ x: randomX, y: Math.max(randomY,50) });
+        }
+
+        return React.createElement(
+          "div",
+          { className: "container" },
+          React.createElement(
+            "div",
+            { className: "gamearea" },
+            React.createElement(Score, { value: score }),
+            React.createElement(Ball, {
+              x: position.x,
+              y: position.y,
+              onClick: handleClick,
+            }),
+          ),
+        );
+      }
+
+      let root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(Game));
+    </script>
+  </body>
+</html>
