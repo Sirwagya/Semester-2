@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <title>counter</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      body {
+        background-color: #151515;
+        color: #585858;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        font-family: "Poppins", sans-serif;
+      }
+      .box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 50vh;
+        width: 20vw;
+
+        padding: 50px 0px;
+      }
+      .name {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .count {
+        font-size: 8rem;
+        font-weight: bold;
+        color: #c93333;
+      }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #505050;
+
+        cursor: pointer;
+        font-size: 2rem;
+      }
+      .minus {
+        font-weight: bold;
+
+        padding: 1px 15px;
+
+        border-color: #242424;
+        border-width: 1px;
+        border-style: solid;
+      }
+      .reset {
+        font-weight: bold;
+
+        padding: 1px 15px;
+
+        border-color: #242424;
+        border-width: 1px;
+        border-style: solid;
+      }
+      .plus {
+        font-weight: bold;
+
+        padding: 1px 15px;
+
+        border-color: #242424;
+        border-width: 1px;
+        border-style: solid;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const { useState } = React;
+      const e = React.createElement;
+
+      function Counter() {
+        const [count, setCount] = useState(0);
+
+        return e(
+          "div",
+          { className: "box" },
+          e("div", { className: "name" }, "COUNTER"),
+          e("div", { className: "count" }, count),
+          e(
+            "div",
+            { className: "buttons" },
+            e(
+              "div",
+              {
+                className: "minus",
+                onClick: () => setCount((prev) => (prev > 0 ? prev - 1 : 0)),
+              },
+              "-",
+            ),
+            e(
+              "div",
+              {
+                className: "reset",
+                onClick: () => setCount(0),
+              },
+              "RESET",
+            ),
+            e(
+              "div",
+              {
+                className: "plus",
+                onClick: () => setCount((prev) => prev + 1),
+              },
+              "+",
+            ),
+          ),
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(e(Counter));
+    </script>
+  </body>
+</html>
